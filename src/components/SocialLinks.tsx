@@ -9,19 +9,19 @@ const socialLinks = [
   {
     name: "GitHub",
     icon: GitHubIcon,
-    url: "https://github.com/mz0x0100",
+    url: "https://github.com/0xZayyad",
     color: "#00FF00",
   },
   {
     name: "LinkedIn",
     icon: LinkedInIcon,
-    url: "https://linkedin.com/in/mz0x0100",
+    url: "https://linkedin.com/in/0xZayyad",
     color: "#0077B5",
   },
   {
     name: "Twitter(X)",
     icon: TwitterIcon,
-    url: "https://x.com/mz0x0100",
+    url: "https://x.com/0xZayyad",
     color: "#1DA1F2",
   },
   {
