@@ -4,20 +4,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import TerminalTabs from "../components/TerminalTabs";
 import HeroSection from "../components/HeroSection";
 import SkillsTerminal from "../components/SkillsTerminal";
-import ProjectCard from "../components/ProjectCard";
+import BentoGrid from "../components/BentoGrid";
 import ContactForm from "../components/ContactForm";
 import SocialLinks from "../components/SocialLinks";
 import CommandPalette from "../components/CommandPalette";
 import KeyboardShortcutsHelp from "../components/KeyboardShortcutsHelp";
 import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
-// import CustomTabPanel from "../components/CustomTabPanel";
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  // Divider,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const projects = [
   {
@@ -28,6 +20,7 @@ const projects = [
     liveUrl: "https://coixa.xyz",
     githubUrl: "https://github.com/mz0x0100/Coixa",
     image: "/coixa-landing.png",
+    size: "large" as const,
     images: [
       "/demo/welcome.png",
       "/demo/dashboard.png",
@@ -60,6 +53,7 @@ const projects = [
     githubUrl: "https://github.com/0xZayyad/DetorkSmartContracts",
     liveUrl: "https://detork.vercel.app",
     image: "/detork.png",
+    size: "large" as const,
   },
   {
     title: "Coinlet",
@@ -69,6 +63,7 @@ const projects = [
     techStack: ["React.js", "Pi Sdk", "Node.js", "MongoDB", "Express"],
     liveUrl: "https://coinlet2261.pinet.com",
     image: "/coinlet.png",
+    size: "medium" as const,
   },
   {
     title: "AGDetection",
@@ -95,6 +90,7 @@ const projects = [
     techStack: ["Stellar SDK", "TypeScript", "Blockchain", "Web3", "React Native", "Expo"],
     liveUrl: "https://coixa.xyz",
     image: "/dashboard.png",
+    size: "medium" as const,
     images: [
       "/demo/welcome.png",
       "/demo/dashboard.png",
@@ -317,47 +313,7 @@ const Index = () => {
           </Container>
         );
       case "projects":
-        return (
-          <Box sx={{ p: 2 }}>
-            <Typography
-              variant="h6"
-              sx={{
-                fontFamily: "Fira Code",
-                fontWeight: 500,
-                mb: 2,
-                color: "#ABB2BF",
-              }}
-            >
-              {" "}
-              Expand to view projects based on category
-            </Typography>
-            {categoryList.map((cat, _idx) => (
-              <Accordion key={cat.label}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography sx={{ fontFamily: "Fira Code", fontWeight: 500 }}>
-                    {cat.label}
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Box
-                    sx={{
-                      display: "grid",
-                      gap: { xs: 2, md: 4 },
-                      gridTemplateColumns: {
-                        xs: "1fr",
-                        md: "repeat(auto-fill, minmax(450px, 1fr))",
-                      },
-                    }}
-                  >
-                    {filterProjects(cat.value).map((project) => (
-                      <ProjectCard key={project.title} {...project} />
-                    ))}
-                  </Box>
-                </AccordionDetails>
-              </Accordion>
-            ))}
-          </Box>
-        );
+        return <BentoGrid projects={projects} categories={categoryList} />;
       case "about":
         return (
           <Container

@@ -15,6 +15,23 @@
   --terminal-green: #00FF00;
   --terminal-bg: #1E1E1E;
   --terminal-border: #333;
+
+  /* Category Colors for Bento Grid */
+  --color-web3-start: #00d9ff;
+  --color-web3-end: #00ff88;
+  --color-web3-glow: rgba(0, 217, 255, 0.3);
+
+  --color-cyber-start: #a855f7;
+  --color-cyber-end: #ec4899;
+  --color-cyber-glow: rgba(168, 85, 247, 0.3);
+
+  --color-ai-start: #3b82f6;
+  --color-ai-end: #6366f1;
+  --color-ai-glow: rgba(59, 130, 246, 0.3);
+
+  --color-mobile-start: #f97316;
+  --color-mobile-end: #fbbf24;
+  --color-mobile-glow: rgba(249, 115, 22, 0.3);
 }
 
 a {
