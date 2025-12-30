@@ -21,6 +21,28 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const projects = [
   {
+    title: "Coixa",
+    category: "web3",
+    description: "Web3 DeFi Wallet",
+    techStack: ["NextJS", "Stellar SDK", "TypeScript", "Blockchain", "Web3", "React Native", "Expo"],
+    liveUrl: "https://coixa.xyz",
+    githubUrl: "https://github.com/mz0x0100/Coixa",
+    image: "/coixa-landing.png",
+    images: [
+      "/demo/welcome.png",
+      "/demo/dashboard.png",
+      "/demo/explore.png",
+      "/demo/swap.png",
+      "/demo/market.png",
+      "/demo/chart.png",
+      "/demo/limit-order.png",
+      "/demo/lp.png",
+      "/demo/activities.png",
+      "/demo/watch-account.png",
+      "/demo/settings.png",
+    ],
+  },
+  {
     title: "DeTork",
     category: "web3",
     description:
@@ -38,15 +60,6 @@ const projects = [
     githubUrl: "https://github.com/mz0x0100/DetorkSmartContracts",
     liveUrl: "https://detork.vercel.app",
     image: "/detork.png",
-  },
-  {
-    title: "Coixa",
-    category: "web3",
-    description: "Simple, secure and open-source web3 wallet",
-    techStack: ["React.js", "Stellar SDK", "TypeScript", "React native"],
-    liveUrl: "https://coixa.vercel.app",
-    githubUrl: "https://github.com/mz0x0100/Coixa",
-    image: "/coixa-dashboard.png",
   },
   {
     title: "Coinlet",
@@ -74,6 +87,27 @@ const projects = [
     techStack: ["Python", "TensorFlow", "OpenCV"],
     githubUrl: "https://github.com/mz0x0100/VirtualPainter",
     image: "/vp.png",
+  },
+  {
+    title: "Coixa Wallet",
+    category: "mobile",
+    description: "A non-custodial DeFi wallet for the Pi blockchain",
+    techStack: ["Stellar SDK", "TypeScript", "Blockchain", "Web3", "React Native", "Expo"],
+    liveUrl: "https://coixa.xyz",
+    image: "/dashboard.png",
+    images: [
+      "/demo/welcome.png",
+      "/demo/dashboard.png",
+      "/demo/explore.png",
+      "/demo/swap.png",
+      "/demo/market.png",
+      "/demo/chart.png",
+      "/demo/limit-order.png",
+      "/demo/lp.png",
+      "/demo/activities.png",
+      "/demo/watch-account.png",
+      "/demo/settings.png",
+    ],
   },
   {
     title: "Fend News",
@@ -153,9 +187,8 @@ const categoryList = [
     value: "web3",
   },
   {
-    label: `Cybersecurity (${
-      projects.filter((p) => p.category === "cybersecurity").length
-    })`,
+    label: `Cybersecurity (${projects.filter((p) => p.category === "cybersecurity").length
+      })`,
     value: "cybersecurity",
   },
   {
