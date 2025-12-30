@@ -14,12 +14,18 @@
     "@emotion/styled": "^11.14.0",
     "@fontsource/fira-code": "^5.2.6",
     "@fontsource/roboto-mono": "^5.2.5",
+    "@monaco-editor/react": "^4.7.0",
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
+    "chart.js": "^4.5.1",
     "framer-motion": "^12.12.2",
     "mui": "^0.0.1",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-chartjs-2": "^5.3.1",
+    "react-countup": "^6.5.3",
+    "react-dom": "^19.1.0",
+    "react-intersection-observer": "^10.0.0",
+    "react-parallax-tilt": "^1.7.315"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

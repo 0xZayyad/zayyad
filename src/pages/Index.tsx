@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
 import TerminalTabs from "../components/TerminalTabs";
 import HeroSection from "../components/HeroSection";
@@ -292,9 +292,6 @@ const Index = () => {
     exit: { opacity: 0, x: 20 },
   };
   // Removed tabValue and handleTabChange (Tabs logic)
-
-  const filterProjects = (category: string | null) =>
-    category ? projects.filter((p) => p.category === category) : projects;
 
   const renderContent = () => {
     switch (activeTab) {
