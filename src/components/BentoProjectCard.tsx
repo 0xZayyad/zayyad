@@ -131,6 +131,7 @@ const BentoProjectCard = ({
               maskComposite: "exclude",
               opacity: isHovered ? 1 : 0,
               transition: "opacity 0.3s ease",
+              pointerEvents: "none",
             },
             boxShadow: isHovered
               ? `0 0 40px ${colors.glow}, 0 0 80px ${colors.glow}`
@@ -185,6 +186,7 @@ const BentoProjectCard = ({
                   background: `linear-gradient(135deg, ${colors.start}20, ${colors.end}20)`,
                   opacity: isHovered ? 0.6 : 0.3,
                   transition: "opacity 0.3s ease",
+                  pointerEvents: "none",
                 }}
               />
 
@@ -313,6 +315,7 @@ const BentoProjectCard = ({
                 y: isHovered ? 0 : 10,
               }}
               transition={{ duration: 0.3 }}
+              style={{ position: "relative", zIndex: 5 }}
             >
               <Stack direction="row" spacing={2}>
                 {githubUrl && (
