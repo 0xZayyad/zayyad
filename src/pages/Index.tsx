@@ -112,7 +112,7 @@ const projects = [
       "A lightweight, opinionated RSS & article reader app built for speed and simplicity. ",
     techStack: ["react-native", "TypeScript", "API"],
     githubUrl: "https://github.com/0xZayyad/feedstack",
-    image: "/feedstack/screenshot1.jpg",
+    image: "/feedstack/mobile_mockup.png",
     size: "medium" as const,
     images: [
       "/feedstack/screenshot1.jpg",
