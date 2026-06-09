@@ -16,7 +16,15 @@ const projects = [
     title: "Coixa",
     category: "web3",
     description: "Web3 DeFi Wallet",
-    techStack: ["NextJS", "Stellar SDK", "TypeScript", "Blockchain", "Web3", "react-native", "Expo"],
+    techStack: [
+      "NextJS",
+      "Stellar SDK",
+      "TypeScript",
+      "Blockchain",
+      "Web3",
+      "react-native",
+      "Expo",
+    ],
     liveUrl: "https://coixa.xyz",
     githubUrl: "https://github.com/mz0x0100/Coixa",
     image: "/coixa-landing.png",
@@ -34,6 +42,26 @@ const projects = [
       "/demo/watch-account.png",
       "/demo/settings.png",
     ],
+  },
+  {
+    title: "Agentic Wallet",
+    category: "web3",
+    description: "Autonomous wallet infrastructure for AI agents on Solana.",
+    techStack: [
+      "NextJS",
+      "Solana",
+      "DeFi",
+      "Orca Whirlpool",
+      "TypeScript",
+      "Blockchain",
+      "Web3",
+      "Nodejs",
+    ],
+    liveUrl: "https://youtu.be/EWCTTyLtFvE?si=gVp5iSp9lOGDsQl-",
+    githubUrl: "https://github.com/0xZayyad/agentic-wallet",
+    image: "/agentic-wallet.png",
+    size: "large" as const,
+    images: [],
   },
   {
     title: "DeTork",
@@ -87,7 +115,14 @@ const projects = [
     title: "Coixa Wallet",
     category: "mobile",
     description: "A non-custodial DeFi wallet for the Pi blockchain",
-    techStack: ["Stellar SDK", "TypeScript", "Blockchain", "Web3", "react-native", "Expo"],
+    techStack: [
+      "Stellar SDK",
+      "TypeScript",
+      "Blockchain",
+      "Web3",
+      "react-native",
+      "Expo",
+    ],
     liveUrl: "https://coixa.xyz",
     image: "/dashboard.png",
     size: "medium" as const,
@@ -189,8 +224,9 @@ const categoryList = [
     value: "web3",
   },
   {
-    label: `Cybersecurity (${projects.filter((p) => p.category === "cybersecurity").length
-      })`,
+    label: `Cybersecurity (${
+      projects.filter((p) => p.category === "cybersecurity").length
+    })`,
     value: "cybersecurity",
   },
   {
