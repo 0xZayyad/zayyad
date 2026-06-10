@@ -121,7 +121,7 @@ const HeroSection = () => {
                     With 6+ years of experience in web & mobile development,
                     AI/ML, and cybersecurity. Passionate about building
                     innovative solutions that push technological boundaries.
-                    Currently exploring web3!
+                    Actively building in web3 space.
                   </Typography>
                 </Box>
                 <Box sx={{ mt: 2, display: "flex", justifyContent: "center" }}>

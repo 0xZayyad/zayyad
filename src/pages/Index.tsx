@@ -383,7 +383,8 @@ const Index = () => {
                 {`# About Me
 
 ## Background
-I'm a passionate software engineer with 6+ years of experience in full-stack development, AI/ML, and cybersecurity. My journey began with ethical hacking, but my curiosity led me to explore various domains of technology.
+I'm a passionate software engineer with 6+ years of experience in full-stack development and cybersecurity. My journey began with ethical hacking, but my curiosity led me to explore various domains of technology.
+I'm currently building actively in the web3 space
 
 ## Philosophy
 I believe in writing clean, maintainable code and building solutions that make a real impact with security in mind. My approach combines technical expertise with creative problem-solving.
@@ -395,7 +396,8 @@ I believe in writing clean, maintainable code and building solutions that make a
 - Staying updated with cybersecurity trends
 
 ## Current Focus
-Currently working on innovative projects involving AI, blockchain, and cybersecurity while continuously learning and growing as a developer.`}
+Currently working on my startup Coixa; a web3 wallet and DeFi gateway in the Pi ecosystem.
+`}
               </pre>
             </Box>
           </Container>
