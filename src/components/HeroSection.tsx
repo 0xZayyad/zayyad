@@ -1,7 +1,9 @@
 import { useEffect } from "react";
-import { Box, Typography, Container, Grid } from "@mui/material";
+import { Box, Typography, Container, Grid, Button, Tooltip } from "@mui/material";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import SocialLinks from "./SocialLinks";
+import DescriptionIcon from "@mui/icons-material/Description";
+import DownloadIcon from "@mui/icons-material/Download";
 
 const typingVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -126,6 +128,81 @@ const HeroSection = () => {
                 </Box>
                 <Box sx={{ mt: 2, display: "flex", justifyContent: "center" }}>
                   <SocialLinks />
+                </Box>
+
+                {/* Resume Button */}
+                <Box sx={{ mt: 3, display: "flex", gap: 1.5, justifyContent: "center", flexWrap: "wrap" }}>
+                  <motion.div
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    <Button
+                      component="a"
+                      href="/Q2-2026-Resume.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="outlined"
+                      startIcon={<DescriptionIcon />}
+                      sx={{
+                        color: "#00FF00",
+                        borderColor: "#00FF00",
+                        fontFamily: "Fira Code",
+                        fontSize: { xs: "0.8rem", md: "0.875rem" },
+                        px: 2.5,
+                        py: 1,
+                        borderRadius: 0,
+                        letterSpacing: "0.05em",
+                        backgroundColor: "rgba(0,255,0,0.04)",
+                        "&:hover": {
+                          backgroundColor: "rgba(0,255,0,0.12)",
+                          borderColor: "#00FF00",
+                          boxShadow: "0 0 12px rgba(0,255,0,0.3)",
+                        },
+                        "&::before": {
+                          content: '"$"',
+                          color: "#F92672",
+                          mr: 0.5,
+                          fontFamily: "Fira Code",
+                        },
+                      }}
+                    >
+                      view_resume.pdf
+                    </Button>
+                  </motion.div>
+
+                  <Tooltip title="Download Resume" placement="top">
+                    <motion.div
+                      whileHover={{ scale: 1.08 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Box
+                        component="a"
+                        href="/Q2-2026-Resume.pdf"
+                        download="Mohammed-Zayyad-Resume.pdf"
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          width: { xs: "42px", md: "46px" },
+                          height: { xs: "42px", md: "46px" },
+                          borderRadius: 0,
+                          backgroundColor: "#1E1E1E",
+                          border: "1px solid #333",
+                          color: "#666",
+                          transition: "all 0.2s ease",
+                          textDecoration: "none",
+                          "&:hover": {
+                            backgroundColor: "#2D2D2D",
+                            color: "#00FF00",
+                            borderColor: "#00FF00",
+                            boxShadow: "0 0 10px rgba(0,255,0,0.25)",
+                          },
+                        }}
+                      >
+                        <DownloadIcon sx={{ fontSize: { xs: "20px", md: "22px" } }} />
+                      </Box>
+                    </motion.div>
+                  </Tooltip>
                 </Box>
               </motion.div>
 
