@@ -1,4 +1,5 @@
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import { Analytics } from "@vercel/analytics/react";
 import Index from "./pages/Index";
 import "@fontsource/fira-code";
 import "@fontsource/roboto-mono";
@@ -43,7 +44,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Index />
+      <Analytics />
     </ThemeProvider>
+
   );
 }
 

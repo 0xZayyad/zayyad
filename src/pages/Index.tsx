@@ -1,21 +1,23 @@
 import { useState } from "react";
-import { Box, Container } from "@mui/material";
-import { AnimatePresence, motion } from "framer-motion";
-import TerminalTabs from "../components/TerminalTabs";
+import { Box, Container, Typography, Grid } from "@mui/material";
+import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
+import ServicesSection from "../components/ServicesSection";
+import ClientProjects from "../components/ClientProjects";
 import SkillsTerminal from "../components/SkillsTerminal";
 import BentoGrid from "../components/BentoGrid";
+import ExperienceTimeline from "../components/ExperienceTimeline";
 import ContactForm from "../components/ContactForm";
 import SocialLinks from "../components/SocialLinks";
 import CommandPalette from "../components/CommandPalette";
-import KeyboardShortcutsHelp from "../components/KeyboardShortcutsHelp";
 import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
 
 const projects = [
   {
     title: "Coixa",
     category: "web3",
-    description: "Web3 DeFi Wallet",
+    description:
+      "Next-gen Web3 DeFi wallet and gateway for the Pi blockchain — non-custodial, secure, fast. Used by 2,000+ active users.",
     techStack: [
       "NextJS",
       "Stellar SDK",
@@ -29,6 +31,7 @@ const projects = [
     githubUrl: "https://github.com/mz0x0100/Coixa",
     image: "/coixa-landing.png",
     size: "large" as const,
+    badge: "🔥 2,000+ users",
     images: [
       "/demo/welcome.png",
       "/demo/dashboard.png",
@@ -46,7 +49,8 @@ const projects = [
   {
     title: "Agentic Wallet",
     category: "web3",
-    description: "Autonomous wallet infrastructure for AI agents on Solana.",
+    description:
+      "Autonomous wallet infrastructure for AI agents on Solana — enables LLM-driven on-chain transactions, swaps, and DeFi operations.",
     techStack: [
       "NextJS",
       "Solana",
@@ -67,7 +71,7 @@ const projects = [
     title: "DeTork",
     category: "web3",
     description:
-      "DeTork is the on-chain freelance marketplace for blockchain developers",
+      "On-chain freelance marketplace for blockchain developers — escrow-backed contracts, milestone payments, and dispute resolution on Solana.",
     techStack: [
       "Rust",
       "Web3",
@@ -87,8 +91,8 @@ const projects = [
     title: "Coinlet",
     category: "web3",
     description:
-      "Coinlet is a P2P trading platform for exchaning Pi cryptocurrency <> Fiat on the Pi browser",
-    techStack: ["React.js", "Pi Sdk", "Node.js", "MongoDB", "Express"],
+      "P2P trading platform for exchanging Pi cryptocurrency ↔ Fiat on the Pi browser — with escrow and verified transactions.",
+    techStack: ["React.js", "Pi SDK", "Node.js", "MongoDB", "Express"],
     liveUrl: "https://coinlet2261.pinet.com",
     image: "/coinlet.png",
     size: "medium" as const,
@@ -97,7 +101,7 @@ const projects = [
     title: "AGDetection",
     category: "ai",
     description:
-      "Age and gender detection using real-time video stream analysis with TensorFlow and OpenCV",
+      "Real-time age and gender detection using live video stream analysis with TensorFlow and OpenCV.",
     techStack: ["Python", "TensorFlow", "OpenCV"],
     githubUrl: "https://github.com/0xZayyad/AGDetection",
     image: "/elon.png",
@@ -106,15 +110,16 @@ const projects = [
     title: "VirtualPainter",
     category: "ai",
     description:
-      "VirtualPainter is an interactive computer vision application that transforms your webcam into a virtual drawing canvas",
+      "Interactive computer vision app that turns your webcam into a virtual drawing canvas using hand gesture tracking.",
     techStack: ["Python", "TensorFlow", "OpenCV"],
     githubUrl: "https://github.com/0xZayyad/VirtualPainter",
     image: "/vp.png",
   },
   {
-    title: "Coixa Wallet",
+    title: "Coixa Mobile",
     category: "mobile",
-    description: "A non-custodial DeFi wallet for the Pi blockchain",
+    description:
+      "React Native non-custodial DeFi wallet for the Pi blockchain — full swap, market, LP, and portfolio tracking features.",
     techStack: [
       "Stellar SDK",
       "TypeScript",
@@ -126,6 +131,7 @@ const projects = [
     liveUrl: "https://coixa.xyz",
     image: "/dashboard.png",
     size: "medium" as const,
+    badge: "🔥 2,000+ users",
     images: [
       "/demo/welcome.png",
       "/demo/dashboard.png",
@@ -144,7 +150,7 @@ const projects = [
     title: "FeedStack",
     category: "mobile",
     description:
-      "A lightweight, opinionated RSS & article reader app built for speed and simplicity. ",
+      "Lightweight, opinionated RSS & article reader app built for speed and simplicity — clean UX with offline support.",
     techStack: ["react-native", "TypeScript", "API"],
     githubUrl: "https://github.com/0xZayyad/feedstack",
     image: "/feedstack/mobile_mockup.png",
@@ -156,18 +162,10 @@ const projects = [
     ],
   },
   {
-    title: "Student Portal",
-    category: "mobile",
-    description:
-      "Polytechnic students portal app with various tools to help students with their academic journey",
-    techStack: ["react-native", "TypeScript", "API"],
-    githubUrl: "https://github.com/0xZayyad/FPTBStudPort",
-    image: "/fnews.png",
-  },
-  {
     title: "KeyScan",
     category: "cybersecurity",
-    description: "An advanced remote keylogging software",
+    description:
+      "Advanced remote keylogging software with encrypted exfiltration over Winsock2 — cross-platform C++ implementation.",
     techStack: ["C++", "Windows API", "Winsock2", "Unix/Linux"],
     githubUrl: "https://github.com/4anonz/KeyScan",
     image: "/keyscan2.png",
@@ -175,7 +173,8 @@ const projects = [
   {
     title: "Packt",
     category: "cybersecurity",
-    description: "Simple command-line based network packet sniffer",
+    description:
+      "Command-line network packet sniffer that captures and inspects raw TCP/IP traffic on Unix/Linux systems.",
     techStack: ["C", "Networking", "Unix/Linux"],
     githubUrl: "https://github.com/4anonz/packt",
     image: "/packt.png",
@@ -184,16 +183,16 @@ const projects = [
     title: "sshcred",
     category: "cybersecurity",
     description:
-      "An advanced SSH(secure shell) audit tool; brute-force login, gather information and open SSH sessions",
+      "Advanced SSH audit tool — brute-force login enumeration, host fingerprinting, and session management.",
     techStack: ["C++", "SSH", "Protocol", "Unix/Linux"],
-    githubUrl: "https://github.com/4anonz/packt",
+    githubUrl: "https://github.com/4anonz/sshcred",
     image: "/sshcred2.png",
   },
   {
     title: "NexScanner",
     category: "cybersecurity",
     description:
-      "NexScanner is a discovery tool for admin panel and subdomains",
+      "Discovery tool for admin panels and subdomain enumeration — fast, multi-threaded Python scanner.",
     techStack: ["Python", "HTTP", "Protocol", "Unix/Linux"],
     githubUrl: "https://github.com/4anonz/NexScanner",
     image: "/nexscanner.png",
@@ -201,19 +200,11 @@ const projects = [
   {
     title: "Bzip",
     category: "cybersecurity",
-    description: "Bzip is a brute force tool for password-protected zip file",
+    description:
+      "Brute-force tool for password-protected ZIP archives with dictionary and rule-based attack modes.",
     techStack: ["Python", "Unix/Linux"],
     githubUrl: "https://github.com/4anonz/Bzip",
     image: "/bzip.png",
-  },
-  {
-    title: "HTTPServer",
-    category: "cybersecurity",
-    description:
-      "HTTPServer is a simple Implementation Of HTTP Server in C programming",
-    techStack: ["C", "HTTP", "Protocol", "Linux", "Winsock2", "Sockets"],
-    githubUrl: "https://github.com/4anonz/HTTPServer",
-    image: "/httpserver.png",
   },
 ];
 
@@ -240,79 +231,58 @@ const categoryList = [
 ];
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState("home");
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
   const shortcuts = [
-    {
-      key: "k",
-      metaKey: true,
-      action: () => setIsCommandPaletteOpen(true),
-    },
-    {
-      key: "h",
-      metaKey: true,
-      action: () => setActiveTab("home"),
-    },
-    {
-      key: "s",
-      metaKey: true,
-      action: () => setActiveTab("skills"),
-    },
-    {
-      key: "p",
-      metaKey: true,
-      action: () => setActiveTab("projects"),
-    },
-    {
-      key: "a",
-      metaKey: true,
-      action: () => setActiveTab("about"),
-    },
-    {
-      key: "e",
-      metaKey: true,
-      action: () => setActiveTab("contact"),
-    },
+    { key: "k", metaKey: true, action: () => setIsCommandPaletteOpen(true) },
   ];
 
   useKeyboardShortcuts(shortcuts);
 
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 64;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
   const commands = [
     {
       id: "home",
-      title: "View Home",
-      description: "Go to the home page",
-      shortcut: "⌘/Ctrl + H",
-      action: () => setActiveTab("home"),
+      title: "Go to Home",
+      description: "Scroll to top",
+      action: () => scrollTo("home"),
     },
     {
-      id: "skills",
-      title: "View Skills",
-      description: "Check out my technical skills",
-      shortcut: "⌘/Ctrl + S",
-      action: () => setActiveTab("skills"),
+      id: "services",
+      title: "View Services",
+      description: "See what I build for clients",
+      action: () => scrollTo("services"),
+    },
+    {
+      id: "client-work",
+      title: "View Client Work",
+      description: "See recent freelance projects",
+      action: () => scrollTo("client-work"),
     },
     {
       id: "projects",
-      title: "View Projects",
-      description: "Browse my featured projects",
-      shortcut: "⌘/Ctrl + P",
-      action: () => setActiveTab("projects"),
+      title: "View Personal Projects",
+      description: "Browse side-projects and open source work",
+      action: () => scrollTo("projects"),
     },
     {
-      id: "about",
-      title: "About Me",
-      description: "Learn more about my background",
-      shortcut: "⌘/Ctrl + A",
-      action: () => setActiveTab("about"),
+      id: "skills",
+      title: "View Skills & Experience",
+      description: "Check out my work history",
+      action: () => scrollTo("skills"),
     },
     {
       id: "contact",
       title: "Contact",
-      description: "Get in touch with me",
-      shortcut: "⌘/Ctrl + E",
-      action: () => setActiveTab("contact"),
+      description: "Get in touch / hire me",
+      action: () => scrollTo("contact"),
     },
     {
       id: "github",
@@ -328,130 +298,115 @@ const Index = () => {
     },
   ];
 
-  const pageVariants = {
-    initial: { opacity: 0, x: -20 },
-    animate: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: 20 },
-  };
-  // Removed tabValue and handleTabChange (Tabs logic)
+  return (
+    <Box
+      sx={{
+        minHeight: "100vh",
+        width: "100%",
+        backgroundColor: "#121212",
+        overflowX: "hidden",
+      }}
+    >
+      <Navbar />
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case "home":
-        return <HeroSection />;
-      case "skills":
-        return (
-          <Container
-            maxWidth="lg"
-            sx={{
-              py: { xs: 2, md: 4 },
-              px: { xs: 1, sm: 2, md: 3 },
-            }}
-          >
-            <SkillsTerminal />
-          </Container>
-        );
-      case "projects":
-        return <BentoGrid projects={projects} categories={categoryList} />;
-      case "about":
-        return (
-          <Container
-            maxWidth="lg"
-            sx={{
-              py: { xs: 2, md: 4 },
-              px: { xs: 1, sm: 2, md: 3 },
-            }}
-          >
-            <Box
-              sx={{
-                backgroundColor: "#1E1E1E",
-                border: "1px solid #333",
-                borderRadius: 1,
-                p: { xs: 2, md: 3 },
-                overflowX: "auto",
-              }}
-            >
-              <pre
-                style={{
-                  color: "#ABB2BF",
+      <Box sx={{ pt: "64px" }}>
+        <HeroSection />
+        
+        <ServicesSection />
+        
+        <ClientProjects />
+        
+        <Box id="projects" sx={{ pt: { xs: 4, md: 6 } }}>
+          <Container maxWidth="lg" sx={{ px: { xs: 1, sm: 2, md: 3 } }}>
+            <Box sx={{ mb: { xs: 3, md: 5 } }}>
+              <Typography
+                variant="h4"
+                sx={{
                   fontFamily: "Fira Code",
-                  whiteSpace: "pre-wrap",
-                  margin: 0,
-                  fontSize: "0.875rem",
+                  color: "#00FF00",
+                  fontWeight: 700,
+                  fontSize: { xs: "1.5rem", md: "2rem" },
+                  mb: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1.5,
                 }}
               >
-                {`# About Me
-
-## Background
-I'm a passionate software engineer with 6+ years of experience in full-stack development and cybersecurity. My journey began with ethical hacking, but my curiosity led me to explore various domains of technology.
-I'm currently building actively in the web3 space
-
-## Philosophy
-I believe in writing clean, maintainable code and building solutions that make a real impact with security in mind. My approach combines technical expertise with creative problem-solving.
-
-## Interests
-- Building scalable distributed systems
-- Exploring AI/ML applications
-- Contributing to open-source projects
-- Staying updated with cybersecurity trends
-
-## Current Focus
-Currently working on my startup Coixa; a web3 wallet and DeFi gateway in the Pi ecosystem.
-`}
-              </pre>
+                <Box component="span" sx={{ color: "#F92672" }}>
+                  &gt;
+                </Box>{" "}
+                Product Labs & Open Source
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: "Fira Code",
+                  color: "#ABB2BF",
+                  fontSize: { xs: "0.85rem", md: "1rem" },
+                }}
+              >
+                // Shipping history beyond client work: products, experiments, and technical depth.
+              </Typography>
             </Box>
+            <BentoGrid projects={projects} categories={categoryList} />
           </Container>
-        );
-      case "contact":
-        return (
-          <Container
-            maxWidth="lg"
-            sx={{
-              py: { xs: 2, md: 4 },
-              px: { xs: 1, sm: 2, md: 3 },
-            }}
-          >
-            <ContactForm />
-            <Box sx={{ mt: 4 }}>
-              <SocialLinks />
-            </Box>
-          </Container>
-        );
-      default:
-        return null;
-    }
-  };
+        </Box>
 
-  return (
-    <>
-      <Box
-        sx={{
-          minHeight: "100vh",
-          minWidth: "100%",
-          backgroundColor: "#121212",
-        }}
-      >
-        <TerminalTabs activeTab={activeTab} onTabChange={setActiveTab} />
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={pageVariants}
-            transition={{ duration: 0.3 }}
-          >
-            {renderContent()}
-          </motion.div>
-        </AnimatePresence>
-        <CommandPalette
-          commands={commands}
-          isOpen={isCommandPaletteOpen}
-          onClose={() => setIsCommandPaletteOpen(false)}
-        />
-        <KeyboardShortcutsHelp />
+        <Box id="skills" sx={{ pt: { xs: 8, md: 10 } }}>
+          <Container maxWidth="lg" sx={{ px: { xs: 1, sm: 2, md: 3 } }}>
+            <Box sx={{ mb: { xs: 3, md: 5 } }}>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontFamily: "Fira Code",
+                  color: "#00FF00",
+                  fontWeight: 700,
+                  fontSize: { xs: "1.5rem", md: "2rem" },
+                  mb: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1.5,
+                }}
+              >
+                <Box component="span" sx={{ color: "#F92672" }}>
+                  &gt;
+                </Box>{" "}
+                Experience & Skills
+              </Typography>
+            </Box>
+            
+            <Grid container spacing={{ xs: 4, md: 6 }}>
+              <Grid size={{ xs: 12, lg: 7 }}>
+                <Box sx={{ ml: { xs: -1, sm: -2, md: -3 }, mr: { xs: -1, sm: -2, md: -3 } }}>
+                  <ExperienceTimeline />
+                </Box>
+              </Grid>
+              <Grid size={{ xs: 12, lg: 5 }}>
+                <SkillsTerminal />
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
+
+        <Box id="contact" sx={{ py: { xs: 8, md: 12 } }}>
+          <Container maxWidth="lg" sx={{ px: { xs: 1, sm: 2, md: 3 } }}>
+            <Grid container justifyContent="center">
+              <Grid size={{ xs: 12, md: 8, lg: 6 }}>
+                <ContactForm />
+                <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
+                  <SocialLinks />
+                </Box>
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
       </Box>
-    </>
+
+      <CommandPalette
+        commands={commands}
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+      />
+    </Box>
   );
 };
 

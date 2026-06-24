@@ -1,53 +1,17 @@
-import { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
-import { motion, AnimatePresence } from "framer-motion";
+import { Box, Typography, Chip, LinearProgress } from "@mui/material";
+import { motion } from "framer-motion";
 
-const skills = {
-  languages: ["Python", "JavaScript", "Rust", "C++", "C", "Java"],
-  frontend: [
-    "React/Next.js",
-    "TypeScript/JavaScript",
-    "HTML5/CSS3",
-    "Material-UI",
-    "Tailwind CSS",
-    "Redux/Context API",
-  ],
-  backend: [
-    "Node.js/Express",
-    "Python/Flask",
-    "PostgreSQL/MongoDB",
-    "RESTful APIs",
-    "Socket.io",
-  ],
-  ai: [
-    "Computer Vision/OpenCV",
-    "TensorFlow/PyTorch",
-    "Scikit-learn",
-    "Data Analysis",
-  ],
-};
+const skills = [
+  { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "MUI", "Framer Motion"], color: "#00d9ff", level: 90 },
+  { category: "Backend", items: ["Node.js", "Express", "PostgreSQL", "MongoDB", "REST APIs", "GraphQL"], color: "#00FF00", level: 85 },
+  { category: "Mobile", items: ["React Native", "Expo", "iOS / Android Build Pipeline"], color: "#f97316", level: 80 },
+  { category: "Web3", items: ["Solana", "Stellar SDK", "Anchor", "Smart Contracts", "Ethers.js"], color: "#a855f7", level: 75 },
+  { category: "Languages", items: ["TypeScript", "JavaScript", "Python", "Rust", "C++", "C"], color: "#E6DB74", level: 85 },
+  { category: "Cybersecurity", items: ["Penetration Testing", "Network Sniffing", "Malware Analysis", "Cryptography"], color: "#F92672", level: 70 },
+  { category: "DevOps & Tools", items: ["Git", "Docker", "Linux", "AWS", "Vercel", "CI/CD"], color: "#ABB2BF", level: 80 },
+];
 
 const SkillsTerminal = () => {
-  const [currentCategory, setCurrentCategory] =
-    useState<keyof typeof skills>("languages");
-  const [typedText, setTypedText] = useState("");
-  const [isTyping, setIsTyping] = useState(true);
-
-  const typeText = async (text: string) => {
-    setIsTyping(true);
-    setTypedText("");
-    for (let i = 0; i <= text.length; i++) {
-      setTypedText(text.slice(0, i));
-      await new Promise((resolve) => setTimeout(resolve, 50));
-    }
-    setIsTyping(false);
-  };
-
-  useEffect(() => {
-    const text = `ls ./${currentCategory}`;
-    typeText(text);
-  }, [currentCategory]);
-
   return (
     <Box
       sx={{
@@ -56,159 +20,147 @@ const SkillsTerminal = () => {
         borderRadius: { xs: 1, md: 2 },
         p: { xs: 2, md: 3 },
         width: "100%",
-        maxWidth: "800px",
         mx: "auto",
         overflow: "hidden",
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          gap: { xs: 1, md: 2 },
-          mb: { xs: 2, md: 3 },
-          flexWrap: "wrap",
-        }}
-      >
-        {(Object.keys(skills) as Array<keyof typeof skills>).map((category) => (
+      {/* Terminal header */}
+      <Box sx={{ mb: 3 }}>
+        <Typography
+          sx={{
+            fontFamily: "Fira Code",
+            color: "#ABB2BF",
+            fontSize: { xs: "0.8rem", md: "0.9rem" },
+            mb: 0.5,
+          }}
+        >
+          <Box component="span" sx={{ color: "#F92672" }}>
+            $
+          </Box>{" "}
+          ./show_skills.sh --all
+        </Typography>
+        <Box
+          sx={{
+            height: "1px",
+            background: "linear-gradient(90deg, #F92672, transparent)",
+            mb: 3,
+          }}
+        />
+      </Box>
+
+      {/* Skills Content */}
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+        {skills.map((skillGroup, idx) => (
           <motion.div
-            key={category}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            key={skillGroup.category}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ delay: idx * 0.1, duration: 0.4 }}
           >
-            <Box
-              onClick={() => setCurrentCategory(category)}
-              sx={{
-                px: { xs: 1.5, md: 2 },
-                py: { xs: 0.75, md: 1 },
-                backgroundColor:
-                  currentCategory === category ? "#2D2D2D" : "transparent",
-                border: "1px solid",
-                borderColor: currentCategory === category ? "#00FF00" : "#333",
-                borderRadius: 1,
-                cursor: "pointer",
-                transition: "all 0.2s ease",
-                "&:hover": {
-                  borderColor: "#00FF00",
-                },
-                userSelect: "none",
-                touchAction: "manipulation",
-              }}
-            >
-              <Typography
+            <Box>
+              <Box
                 sx={{
-                  color: currentCategory === category ? "#00FF00" : "#ABB2BF",
-                  fontFamily: "Fira Code",
-                  fontSize: { xs: "0.875rem", md: "1rem" },
-                  textTransform: "lowercase",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  mb: 1,
                 }}
               >
-                {category}
-              </Typography>
+                <Typography
+                  sx={{
+                    fontFamily: "Fira Code",
+                    color: skillGroup.color,
+                    fontWeight: 600,
+                    fontSize: "0.85rem",
+                  }}
+                >
+                  {skillGroup.category}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontFamily: "Fira Code",
+                    color: "#555",
+                    fontSize: "0.75rem",
+                  }}
+                >
+                  {skillGroup.level}%
+                </Typography>
+              </Box>
+
+              <LinearProgress
+                variant="determinate"
+                value={skillGroup.level}
+                sx={{
+                  backgroundColor: "rgba(255,255,255,0.05)",
+                  height: 4,
+                  borderRadius: 2,
+                  mb: 1.5,
+                  "& .MuiLinearProgress-bar": {
+                    backgroundColor: skillGroup.color,
+                    borderRadius: 2,
+                  },
+                }}
+              />
+
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.75 }}>
+                {skillGroup.items.map((item) => (
+                  <Chip
+                    key={item}
+                    label={item}
+                    size="small"
+                    sx={{
+                      backgroundColor: "transparent",
+                      color: "#ABB2BF",
+                      border: "1px solid #333",
+                      fontFamily: "Fira Code",
+                      fontSize: "0.75rem",
+                      borderRadius: "4px",
+                      transition: "all 0.2s ease",
+                      "&:hover": {
+                        borderColor: skillGroup.color,
+                        color: skillGroup.color,
+                        backgroundColor: `${skillGroup.color}10`,
+                      },
+                    }}
+                  />
+                ))}
+              </Box>
             </Box>
           </motion.div>
         ))}
       </Box>
 
-      <Box
-        sx={{
-          backgroundColor: "#2D2D2D",
-          borderRadius: 1,
-          p: { xs: 1.5, md: 2 },
-        }}
-      >
-        <Box sx={{ mb: 2, display: "flex", alignItems: "center" }}>
-          <Typography
-            component="span"
-            sx={{
-              color: "#F92672",
-              fontFamily: "Fira Code",
-              fontSize: { xs: "0.875rem", md: "1rem" },
-              mr: 1,
-            }}
-          >
+      {/* Terminal footer prompt */}
+      <Box sx={{ mt: 4, display: "flex", alignItems: "center" }}>
+        <Typography
+          sx={{
+            fontFamily: "Fira Code",
+            color: "#00FF00",
+            fontSize: "0.85rem",
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+          }}
+        >
+          <Box component="span" sx={{ color: "#F92672" }}>
             $
-          </Typography>
-          <Typography
-            component="span"
-            sx={{
-              color: "#00FF00",
-              fontFamily: "Fira Code",
-              fontSize: { xs: "0.875rem", md: "1rem" },
-            }}
-          >
-            {typedText}
-          </Typography>
+          </Box>{" "}
           <Box
             component="span"
             sx={{
               display: "inline-block",
               width: "8px",
-              height: "16px",
+              height: "14px",
               backgroundColor: "#00FF00",
-              ml: 1,
-              animation: isTyping ? "none" : "blink 1s step-end infinite",
+              animation: "blink 1s step-end infinite",
               "@keyframes blink": {
-                "0%, 100%": {
-                  opacity: 1,
-                },
-                "50%": {
-                  opacity: 0,
-                },
+                "0%, 100%": { opacity: 1 },
+                "50%": { opacity: 0 },
               },
             }}
           />
-        </Box>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentCategory}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Box
-              sx={{
-                display: "grid",
-                gridTemplateColumns: {
-                  xs: "repeat(1, 1fr)",
-                  sm: "repeat(2, 1fr)",
-                  md: "repeat(3, 1fr)",
-                },
-                gap: { xs: 1.5, md: 2 },
-              }}
-            >
-              {skills[currentCategory].map((skill, index) => (
-                <motion.div
-                  key={skill}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{
-                    opacity: 1,
-                    x: 0,
-                    transition: { delay: index * 0.1 },
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      color: "#ABB2BF",
-                      fontFamily: "Fira Code",
-                      fontSize: { xs: "0.875rem", md: "1rem" },
-                      display: "flex",
-                      alignItems: "center",
-                      "&::before": {
-                        content: '"-"',
-                        color: "#F92672",
-                        mr: 1,
-                      },
-                    }}
-                  >
-                    {skill}
-                  </Typography>
-                </motion.div>
-              ))}
-            </Box>
-          </motion.div>
-        </AnimatePresence>
+        </Typography>
       </Box>
     </Box>
   );
