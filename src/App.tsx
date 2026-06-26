@@ -32,7 +32,7 @@ const theme = createTheme({
       styleOverrides: `
         html, body {
           overflow-x: hidden;
-          max-width: 100vw;
+          max-width: 100%;
         }
       `,
     },

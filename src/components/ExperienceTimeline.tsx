@@ -1,4 +1,4 @@
-import { Box, Typography, Container, Divider, Link } from "@mui/material";
+import { Box, Typography, Divider, Link } from "@mui/material";
 import { motion } from "framer-motion";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import SchoolIcon from "@mui/icons-material/School";
@@ -68,9 +68,8 @@ const education = [
 
 const ExperienceTimeline = () => {
   return (
-    <Container
-      maxWidth="lg"
-      sx={{ py: { xs: 2, md: 4 }, px: { xs: 1, sm: 2, md: 3 } }}
+    <Box
+      sx={{ py: { xs: 1, md: 2 }, width: "100%" }}
     >
       <Box
         sx={{
@@ -90,9 +89,13 @@ const ExperienceTimeline = () => {
               fontSize: "0.8rem",
               mb: 3,
               letterSpacing: "0.1em",
+              overflowX: "hidden",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
             }}
           >
-            ═══ WORK EXPERIENCE ═══════════════════════════════
+            ═══ WORK EXPERIENCE ═══════════════
           </Typography>
 
           {workExperience.map((job, idx) => (
@@ -271,9 +274,13 @@ const ExperienceTimeline = () => {
               fontSize: "0.8rem",
               mb: 3,
               letterSpacing: "0.1em",
+              overflowX: "hidden",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
             }}
           >
-            ═══ EDUCATION ═════════════════════════════════════
+            ═══ EDUCATION ═══════════════════════
           </Typography>
 
           {education.map((edu, idx) => (
@@ -335,7 +342,7 @@ const ExperienceTimeline = () => {
           ))}
         </Box>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

@@ -34,6 +34,16 @@
   --color-mobile-glow: rgba(249, 115, 22, 0.3);
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -46,15 +56,12 @@ a:hover {
 
 html, body {
   overflow-x: hidden;
-  max-width: 100vw;
+  max-width: 100%;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
-  min-height: 100vh;
   background-color: #121212;
   color: var(--terminal-green);
 }

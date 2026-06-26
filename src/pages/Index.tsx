@@ -303,6 +303,7 @@ const Index = () => {
       sx={{
         minHeight: "100vh",
         width: "100%",
+        maxWidth: "100%",
         backgroundColor: "#121212",
         overflowX: "hidden",
       }}
@@ -376,9 +377,7 @@ const Index = () => {
             
             <Grid container spacing={{ xs: 4, md: 6 }}>
               <Grid size={{ xs: 12, lg: 7 }}>
-                <Box sx={{ ml: { xs: -1, sm: -2, md: -3 }, mr: { xs: -1, sm: -2, md: -3 } }}>
-                  <ExperienceTimeline />
-                </Box>
+                <ExperienceTimeline />
               </Grid>
               <Grid size={{ xs: 12, lg: 5 }}>
                 <SkillsTerminal />
