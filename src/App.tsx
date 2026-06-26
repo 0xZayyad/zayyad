@@ -28,6 +28,14 @@ const theme = createTheme({
     h6: { fontFamily: "Fira Code, monospace" },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        html, body {
+          overflow-x: hidden;
+          max-width: 100vw;
+        }
+      `,
+    },
     MuiButton: {
       styleOverrides: {
         root: {
