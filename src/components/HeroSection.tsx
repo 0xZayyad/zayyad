@@ -65,7 +65,7 @@ const HeroSection = () => {
                 <Typography
                   variant="h4"
                   className="glitch"
-                  data-text="Available for freelance and full-time roles"
+                  data-text="whoami"
                   sx={{
                     color: "#00FF00",
                     fontFamily: "Fira Code",
