@@ -310,7 +310,7 @@ const Index = () => {
     >
       <Navbar />
 
-      <Box sx={{ pt: "64px" }}>
+      <Box id="main-content" sx={{ pt: "64px" }}>
         <HeroSection />
         
         <ServicesSection />

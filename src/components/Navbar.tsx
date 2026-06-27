@@ -3,6 +3,7 @@ import { Box, Typography, IconButton, Drawer, Stack } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { scrollTo } from "../utils/scrollUtils";
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -12,16 +13,6 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-const scrollTo = (href: string) => {
-  const id = href.replace("#", "");
-  const el = document.getElementById(id);
-  if (el) {
-    const navHeight = 64;
-    const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
-    window.scrollTo({ top, behavior: "smooth" });
-  }
-};
-
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -29,8 +20,22 @@ const Navbar = () => {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+
+    // Handle keyboard events for drawer accessibility
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && drawerOpen) {
+        setDrawerOpen(false);
+      }
+      // Arrow down/up navigation within drawer (optional enhancement)
+      // Could be implemented here if needed
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [drawerOpen]);
 
   const handleNavClick = (href: string) => {
     setDrawerOpen(false);
@@ -39,6 +44,27 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Skip to content link for accessibility */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: -40,
+          left: 0,
+          backgroundColor: "#00FF00",
+          color: "#121212",
+          padding: "0.5rem 1rem",
+          zIndex: 1000,
+          fontFamily: "Fira Code",
+          fontSize: "0.875rem",
+          "&:focus": {
+            top: 0,
+          },
+        }}
+      >
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+      </Box>
       <Box
         component="nav"
         sx={{
@@ -189,6 +215,9 @@ const Navbar = () => {
         anchor="right"
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
+        ModalProps={{
+          keepMounted: true, // Better portal mounting
+        }}
         PaperProps={{
           sx: {
             backgroundColor: "#1A1A1A",
@@ -198,6 +227,9 @@ const Navbar = () => {
             px: 3,
             py: 4,
           },
+          role: "dialog",
+          "aria-modal": "true",
+          "aria-labelledby": "drawer-title",
         }}
       >
         <Box
@@ -209,6 +241,7 @@ const Navbar = () => {
           }}
         >
           <Typography
+            id="drawer-title"
             sx={{
               fontFamily: "Fira Code",
               color: "#00FF00",
